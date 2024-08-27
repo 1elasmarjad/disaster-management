@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from flask import Flask
+from flask import Flask, render_template
 import requests
 import urllib.parse
 
@@ -8,7 +8,7 @@ from proj_types.earthquake_api import EarthquakeFetchData
 
 app = Flask(__name__)
 
-DATA_FRESHNESS = timedelta(days=7)
+DATA_FRESHNESS = timedelta(days=7)  # how fresh the data from apis should be
 
 
 @app.route('/api/data')
@@ -27,6 +27,11 @@ def fetch_api_data():
     data: EarthquakeFetchData = resp.json()
 
     return data
+
+
+@app.route('/')
+def index():
+    return render_template("index.html")
 
 
 if __name__ == '__main__':
