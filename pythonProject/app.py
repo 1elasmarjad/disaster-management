@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-from data import EarthquakeUSGS, WildfiresNASA
+from data import EarthquakeUSGS, WildfiresNASA, OLDEST_DATA
 
 app = Flask(__name__)
 
@@ -20,7 +20,7 @@ def fetch_api_data():
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index.html", oldest_data=OLDEST_DATA.days)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 const mapCenter = [37.0902, -95.7129]; // USA
 
-const map = L.map("map").setView(mapCenter, 4);
+const map = L.map("map").setView(mapCenter, 5);
 
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
@@ -17,7 +17,7 @@ const earthquakeIcon = L.icon({
 const flameIcon = L.icon({
   iconUrl: "/static/flame.png", // icon from https://www.flaticon.com/free-icon/flame_426833?term=flame&page=1&position=1&origin=tag&related_id=426833
   iconSize: [15, 15],
-})
+});
 
 fetch("/api/data")
   .then((resp) => {
@@ -28,8 +28,6 @@ fetch("/api/data")
     return resp.json();
   })
   .then((data) => {
-    console.log(data);
-
     data.disasters.forEach((disaster) => {
       const coord = disaster.geometry.coordinates;
       const lat = coord[1];
@@ -42,7 +40,7 @@ fetch("/api/data")
       } else if (disaster.type === "wildfire") {
         L.marker([lat, lon], { icon: flameIcon })
           .addTo(map)
-          .bindPopup("Severity: " + disaster.metadata.severity);
+          .bindPopup(disaster.metadata.title);
       }
     });
   });
