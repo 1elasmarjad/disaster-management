@@ -20,6 +20,7 @@ class FeatureProperties(TypedDict):
 
 class EarthquakeFeature(TypedDict):
     geometry: FeatureGeometry
+    properties: FeatureProperties
     id: str
     type: Literal["Feature"]
 

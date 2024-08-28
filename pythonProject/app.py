@@ -21,6 +21,10 @@ def fetch_api_data():
     params = {
         "format": "geojson",
         "starttime": start_time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "minlatitude": 24.6,
+        "maxlatitude": 50,
+        "minlongitude": -125,
+        "maxlongitude": -65,
     }
 
     resp = requests.get(url + "?" + urllib.parse.urlencode(params))
