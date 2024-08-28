@@ -1,13 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 /*Legend specific*/
 .legend {
   padding: 6px 8px;
-  font: 14px Arial, Helvetica, sans-serif;
-  background: white;
-  background: rgba(255, 255, 255, 0.8);
+  background: #d4d4d3d0;
   /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
   /*border-radius: 5px;*/
   line-height: 24px;
-  color: #555;
+  color: black;
   border-radius: 0.4rem;
   padding: 0.5rem;
 }
@@ -15,7 +15,7 @@
   text-align: center;
   font-size: 16px;
   margin: 2px 12px 8px;
-  color: #777;
+  color: black;
   font-weight: bold;
 }
 
@@ -24,4 +24,22 @@
   align-items: center;
   gap: 0.5rem;
   margin: 0.6rem 0;
+}
+
+#map {
+  height: 800px;
+  width: 90%;
+}
+
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+body {
+  background-color: #142b31;
+  color: #d4d4d3;
+  font-family: 'Inter', sans-serif;
 }
