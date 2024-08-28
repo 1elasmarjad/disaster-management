@@ -10,9 +10,14 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // fetch all data from the API
 
 const earthquakeIcon = L.icon({
-  iconUrl: "/static/explosion.png", // icon from https://www.flaticon.com/free-icons/explosion
+  iconUrl: "/static/explosion.png", // icon from https://www.flaticon.com/free-icon/explosion_616500?term=explosion&page=1&position=6&origin=tag&related_id=616500
   iconSize: [15, 15],
 });
+
+const flameIcon = L.icon({
+  iconUrl: "/static/flame.png", // icon from https://www.flaticon.com/free-icon/flame_426833?term=flame&page=1&position=1&origin=tag&related_id=426833
+  iconSize: [15, 15],
+})
 
 fetch("/api/data")
   .then((resp) => {
@@ -25,15 +30,19 @@ fetch("/api/data")
   .then((data) => {
     console.log(data);
 
-    data.features.forEach((feature) => {
-      const coord = feature.geometry.coordinates;
+    data.disasters.forEach((disaster) => {
+      const coord = disaster.geometry.coordinates;
       const lat = coord[1];
       const lon = coord[0];
 
-      console.log(feature);
-
-      L.marker([lat, lon], { icon: earthquakeIcon })
-        .addTo(map)
-        .bindPopup("Magnitude: " + feature.metadata.mag);
+      if (disaster.type === "earthquake") {
+        L.marker([lat, lon], { icon: earthquakeIcon })
+          .addTo(map)
+          .bindPopup("Magnitude: " + disaster.metadata.mag);
+      } else if (disaster.type === "wildfire") {
+        L.marker([lat, lon], { icon: flameIcon })
+          .addTo(map)
+          .bindPopup("Severity: " + disaster.metadata.severity);
+      }
     });
   });

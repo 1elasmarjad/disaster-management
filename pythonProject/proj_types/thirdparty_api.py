@@ -28,3 +28,30 @@ class EarthquakeFeature(TypedDict):
 class EarthquakeFetchData(TypedDict):
     bbox: list[float]
     features: list[EarthquakeFeature]
+
+
+class NASAEVentCategory(TypedDict):
+    id: int
+    title: str
+
+
+class NASAGeometry(TypedDict):
+    date: str
+    type: str
+    coordinates: list[float]
+
+
+class NASAEvent(TypedDict):
+    id: str
+    title: str
+    description: str
+    link: str
+    categories: list[NASAEVentCategory]
+    geometries: list[NASAGeometry]
+
+
+class NASAEventsFetchData(TypedDict):
+    title: str
+    description: str
+    link: str
+    events: list[NASAEvent]

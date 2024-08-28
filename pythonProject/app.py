@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-from data import EarthquakeUSGS
+from data import EarthquakeUSGS, WildfiresNASA
 
 app = Flask(__name__)
 
@@ -8,10 +8,13 @@ app = Flask(__name__)
 @app.route('/api/data')
 def fetch_api_data():
     usgs = EarthquakeUSGS()
-    data = usgs.get_data()
+    earthquakes = usgs.get_data()
+
+    nasa = WildfiresNASA()
+    wildfires = nasa.get_data()
 
     return {
-        "features": list(data),
+        "disasters": list(earthquakes) + list(wildfires),
     }
 
 

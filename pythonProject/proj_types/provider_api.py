@@ -1,10 +1,10 @@
 from typing import Literal, TypedDict
 
-from proj_types.earthquake_api import FeatureGeometry
+from proj_types.thirdparty_api import FeatureGeometry
 
 
 class Disaster(TypedDict):
-    type: Literal["earthquake"]
+    type: Literal["earthquake", "wildfire"]
     geometry: FeatureGeometry
 
     metadata: dict
