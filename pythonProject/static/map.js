@@ -10,7 +10,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // fetch all data from the API
 
 const earthquakeIcon = L.icon({
-  iconUrl: "/static/explosion.png", // icon from https://www.flaticon.com/free-icons/explosion 
+  iconUrl: "/static/explosion.png", // icon from https://www.flaticon.com/free-icons/explosion
   iconSize: [15, 15],
 });
 
@@ -23,6 +23,8 @@ fetch("/api/data")
     return resp.json();
   })
   .then((data) => {
+    console.log(data);
+
     data.features.forEach((feature) => {
       const coord = feature.geometry.coordinates;
       const lat = coord[1];
@@ -32,6 +34,6 @@ fetch("/api/data")
 
       L.marker([lat, lon], { icon: earthquakeIcon })
         .addTo(map)
-        .bindPopup("Magnitude: " + feature.properties.mag);
+        .bindPopup("Magnitude: " + feature.metadata.mag);
     });
   });
